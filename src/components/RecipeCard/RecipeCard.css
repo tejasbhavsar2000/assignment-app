@@ -1,0 +1,29 @@
+.card {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  align-items: center;
+  text-align: center;
+  margin: 1.5em 0.5em;
+}
+.card:hover {
+  cursor: pointer;
+}
+.card .img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15rem;
+  margin: 0;
+  height: 15rem;
+  border-bottom: 0.1em solid black;
+}
+.card img {
+  border-radius: 50%;
+  width: 14rem;
+  height: 14rem;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 0.4em;
+}

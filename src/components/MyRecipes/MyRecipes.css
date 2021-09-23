@@ -1,0 +1,18 @@
+.MyRecipes {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+
+  background: white;
+  position: relative;
+}
+.private h1 {
+  margin-top: 2rem;
+  width: fit-content;
+}
+.private {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
