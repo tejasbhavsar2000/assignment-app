@@ -8,17 +8,19 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
-
-mongoose.connect(
-  "mongodb://localhost:27017/admin",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("DB connected");
-  }
-);
+const uri = `mongodb+srv://recipesapp:recipe@cluster0.o6c0m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+try {
+  // Connect to the MongoDB cluster
+  mongoose.connect(
+    uri,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => {
+      console.log(" Mongoose is connected");
+    }
+  );
+} catch (e) {
+  console.log("could not connect");
+}
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -124,7 +126,6 @@ app.get("/allRecipes", (req, res) => {
 });
 
 app.get("/MyRecipes/:id", (req, res) => {
-  console.log(req.params.id);
   Recipe.find({ userid: req.params.id }, (err, docs) => {
     if (docs) res.send(docs);
   });
@@ -175,110 +176,112 @@ app.delete("/DeleteRecipe/:id", (req, res) => {
       console.log(error); // Failure
     });
 });
-cron.schedule("0 0 1 * *", function () {
-  let menu = {};
-  console.log("running a task every month");
-  MonthlyMenu.deleteMany({}).then(
-    Recipe.find({ mealType: "Breakfast" }, (err, docs) => {
-      if (docs) {
-        menu["Breakfast"] = _.shuffle(docs).slice(0, 5);
-        Recipe.find({ mealType: "Lunch" }, (err, docs) => {
-          if (docs) {
-            menu["Lunch"] = _.shuffle(docs).slice(0, 5);
-            Recipe.find({ mealType: "Dinner" }, (err, docs) => {
-              if (docs) {
-                menu["Dinner"] = _.shuffle(docs).slice(0, 5);
-                const daily = new MonthlyMenu({
-                  Breakfast: menu.Breakfast,
-                  Lunch: menu.Lunch,
-                  Dinner: menu.Dinner,
-                });
 
-                daily.save((err) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log("Successfully Added");
-                  }
-                });
-              }
-            });
-          }
-        });
-      }
-    })
-  );
-});
-cron.schedule("0 0 0 * * *", function () {
-  let menu = {};
-  console.log("will run every day at 12:00 AM");
-  DailyMenu.deleteMany({}).then(
-    Recipe.find({ mealType: "Breakfast" }, (err, docs) => {
-      if (docs) {
-        menu["Breakfast"] = _.shuffle(docs).slice(0, 5);
-        Recipe.find({ mealType: "Lunch" }, (err, docs) => {
-          if (docs) {
-            menu["Lunch"] = _.shuffle(docs).slice(0, 5);
-            Recipe.find({ mealType: "Dinner" }, (err, docs) => {
-              if (docs) {
-                menu["Dinner"] = _.shuffle(docs).slice(0, 5);
-                const daily = new DailyMenu({
-                  Breakfast: menu.Breakfast,
-                  Lunch: menu.Lunch,
-                  Dinner: menu.Dinner,
-                });
+// These are cron jobs which will be trigered daily, Montly, Weekly
+// cron.schedule("0 0 1 * *", function () {
+//   let menu = {};
+//   console.log("running a task every month");
+//   MonthlyMenu.deleteMany({}).then(
+//     Recipe.find({ mealType: "Breakfast" }, (err, docs) => {
+//       if (docs) {
+//         menu["Breakfast"] = _.shuffle(docs).slice(0, 5);
+//         Recipe.find({ mealType: "Lunch" }, (err, docs) => {
+//           if (docs) {
+//             menu["Lunch"] = _.shuffle(docs).slice(0, 5);
+//             Recipe.find({ mealType: "Dinner" }, (err, docs) => {
+//               if (docs) {
+//                 menu["Dinner"] = _.shuffle(docs).slice(0, 5);
+//                 const daily = new MonthlyMenu({
+//                   Breakfast: menu.Breakfast,
+//                   Lunch: menu.Lunch,
+//                   Dinner: menu.Dinner,
+//                 });
 
-                daily.save((err) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log("Successfully Added");
-                  }
-                });
-              }
-            });
-          }
-        });
-      }
-    })
-  );
-});
+//                 daily.save((err) => {
+//                   if (err) {
+//                     console.log(err);
+//                   } else {
+//                     console.log("Successfully Added");
+//                   }
+//                 });
+//               }
+//             });
+//           }
+//         });
+//       }
+//     })
+//   );
+// });
+// cron.schedule("0 0 0 * * *", function () {
+//   let menu = {};
+//   console.log("will run every day at 12:00 AM");
+//   DailyMenu.deleteMany({}).then(
+//     Recipe.find({ mealType: "Breakfast" }, (err, docs) => {
+//       if (docs) {
+//         menu["Breakfast"] = _.shuffle(docs).slice(0, 5);
+//         Recipe.find({ mealType: "Lunch" }, (err, docs) => {
+//           if (docs) {
+//             menu["Lunch"] = _.shuffle(docs).slice(0, 5);
+//             Recipe.find({ mealType: "Dinner" }, (err, docs) => {
+//               if (docs) {
+//                 menu["Dinner"] = _.shuffle(docs).slice(0, 5);
+//                 const daily = new DailyMenu({
+//                   Breakfast: menu.Breakfast,
+//                   Lunch: menu.Lunch,
+//                   Dinner: menu.Dinner,
+//                 });
 
-cron.schedule("5 8 * * Sun", function () {
-  console.log("will run every week at 12:00 AM");
-  let menu = {};
-  console.log("running a task every minute");
-  WeeklyMenu.deleteMany({}).then(
-    Recipe.find({ mealType: "Breakfast" }, (err, docs) => {
-      if (docs) {
-        menu["Breakfast"] = _.shuffle(docs).slice(0, 5);
-        Recipe.find({ mealType: "Lunch" }, (err, docs) => {
-          if (docs) {
-            menu["Lunch"] = _.shuffle(docs).slice(0, 5);
-            Recipe.find({ mealType: "Dinner" }, (err, docs) => {
-              if (docs) {
-                menu["Dinner"] = _.shuffle(docs).slice(0, 5);
-                const daily = new WeeklyMenu({
-                  Breakfast: menu.Breakfast,
-                  Lunch: menu.Lunch,
-                  Dinner: menu.Dinner,
-                });
+//                 daily.save((err) => {
+//                   if (err) {
+//                     console.log(err);
+//                   } else {
+//                     console.log("Successfully Added");
+//                   }
+//                 });
+//               }
+//             });
+//           }
+//         });
+//       }
+//     })
+//   );
+// });
 
-                daily.save((err) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log("Successfully Added");
-                  }
-                });
-              }
-            });
-          }
-        });
-      }
-    })
-  );
-});
+// cron.schedule("5 8 * * Sun", function () {
+//   console.log("will run every week at 12:00 AM");
+//   let menu = {};
+//   console.log("running a task every minute");
+//   WeeklyMenu.deleteMany({}).then(
+//     Recipe.find({ mealType: "Breakfast" }, (err, docs) => {
+//       if (docs) {
+//         menu["Breakfast"] = _.shuffle(docs).slice(0, 5);
+//         Recipe.find({ mealType: "Lunch" }, (err, docs) => {
+//           if (docs) {
+//             menu["Lunch"] = _.shuffle(docs).slice(0, 5);
+//             Recipe.find({ mealType: "Dinner" }, (err, docs) => {
+//               if (docs) {
+//                 menu["Dinner"] = _.shuffle(docs).slice(0, 5);
+//                 const daily = new WeeklyMenu({
+//                   Breakfast: menu.Breakfast,
+//                   Lunch: menu.Lunch,
+//                   Dinner: menu.Dinner,
+//                 });
+
+//                 daily.save((err) => {
+//                   if (err) {
+//                     console.log(err);
+//                   } else {
+//                     console.log("Successfully Added");
+//                   }
+//                 });
+//               }
+//             });
+//           }
+//         });
+//       }
+//     })
+//   );
+// });
 app.listen(9002, () => {
   console.log("BE started at port 9002");
 });
