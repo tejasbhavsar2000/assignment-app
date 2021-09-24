@@ -4,12 +4,16 @@
 
 ## How to Run
 Install all dependencies
-`npm i`
+### `npm i`
 Start Client Dev Server
-`npm start`
+### `npm start`
 Goto backend directory
-`cd .\backend\`
+### `cd .\backend\`
+Create .env file, set USERNAME and PASSWORD and
 Start Server
-`node .`
+### `node .`
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-
+Use this Login credentials to log in to App: 
+### Username: admin
+### Password: admin
