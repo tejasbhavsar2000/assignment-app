@@ -13,3 +13,7 @@ Create .env file, set USERNAME and PASSWORD and
 Start Server
 ### `node .`
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+Use this Login credentials to log in to App: 
+Username: Admin
+Password: Admin
