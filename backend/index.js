@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
-const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.o6c0m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.API}:${process.env.PASSWORD}@cluster0.o6c0m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 try {
   // Connect to the MongoDB cluster
   mongoose.connect(
