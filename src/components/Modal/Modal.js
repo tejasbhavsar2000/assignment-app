@@ -30,7 +30,6 @@ const Modal = ({ type, handleClose }) => {
   }, []);
   const getData = () => {
     axios.get(`http://localhost:9002/${type}`).then((res) => {
-      console.log(res.data);
       setMenu(res.data);
     });
   };
@@ -102,7 +101,7 @@ const Modal = ({ type, handleClose }) => {
           <hr />
           <ul class="">
             {menu[0] &&
-              menu[0].Lunch.map((item) => {
+              menu[0].Dinner.map((item) => {
                 return (
                   <li class="el-item">
                     <div class="flex-grid" uk-grid="">
@@ -125,50 +124,7 @@ const Modal = ({ type, handleClose }) => {
               })}
           </ul>
         </div>
-        {/* <h1>Menu</h1>
 
-        <div className="food">
-          <h2>Breakfast</h2>
-          {menu[0] &&
-            menu[0].Breakfast.map((item) => {
-              return (
-                <div>
-                  <div>{item.name}</div>
-                  <div className="food_img">
-                    <img src={item.image} alt="image"></img>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-        <div className="food">
-          <h2>Lunch</h2>
-          {menu[0] &&
-            menu[0].Lunch.map((item) => {
-              return (
-                <div>
-                  <div>{item.name}</div>
-                  <div className="food_img">
-                    <img src={item.image} alt="image"></img>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-        <div className="food">
-          <h2>Dinner</h2>
-          {menu[0] &&
-            menu[0].Dinner.map((item) => {
-              return (
-                <div>
-                  <div>{item.name}</div>
-                  <div className="food_img">
-                    <img src={item.image} alt="image"></img>
-                  </div>
-                </div>
-              );
-            })}
-        </div> */}
         <button onClick={handleClose}>Close</button>
       </motion.div>
     </Backdrop>

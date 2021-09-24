@@ -46,7 +46,6 @@ const UpdateRecipe = ({
       ...recipe,
       [name]: value,
     });
-    console.log(recipe);
   };
   const add = () => {
     axios
@@ -121,7 +120,6 @@ const UpdateRecipe = ({
                 ...recipe,
                 isPublic: e.target.value === "private" ? false : true,
               });
-              console.log(recipe);
             }}
             name="isPublic"
             placeholder="Select Type of Meal"

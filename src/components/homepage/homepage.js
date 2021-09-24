@@ -10,7 +10,6 @@ const Homepage = ({ user, setLoginUser }) => {
   }, []);
   const getData = () => {
     axios.get("http://localhost:9002/allRecipes").then((res) => {
-      console.log(res.data);
       setAllRecipes(res.data);
     });
   };
@@ -20,14 +19,7 @@ const Homepage = ({ user, setLoginUser }) => {
       <Nav user={user} getData={getData} setLoginUser={setLoginUser} />
       <div className="public">
         <h1>Public Recipes</h1>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            width: "100%",
-            flexWrap: "wrap",
-          }}
-        >
+        <div>
           {allRecipes.map((item) => {
             return (
               <RecipeCard

@@ -8,6 +8,7 @@
   align-items: center;
   text-align: center;
 }
+
 .register > .button {
   background: #1877f2;
   border: 1px solid #1877f2;
@@ -18,4 +19,9 @@
   border-radius: 8px;
   outline: none;
   cursor: pointer;
+}
+@media screen and (max-width: 800px) {
+  .main {
+    width: 50vw;
+  }
 }

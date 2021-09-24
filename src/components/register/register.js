@@ -60,7 +60,6 @@ const Register = () => {
       animate="visible"
       exit="exit"
     >
-      {console.log("User", user)}
       <h1>Register</h1>
       <input
         type="text"

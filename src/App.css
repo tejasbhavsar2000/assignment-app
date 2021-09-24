@@ -1,7 +1,8 @@
 .App {
-  display: flex;
-  min-width: 100vw;
   min-height: 100vh;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #f0f2f5;

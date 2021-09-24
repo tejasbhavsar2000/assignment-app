@@ -1,4 +1,3 @@
-import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import RecipeDetail from "../RecipeDetails/RecipeDetail";
 import UpdateRecipe from "../UpdateRecipe/UpdateRecipe";
@@ -21,31 +20,30 @@ const RecipeCard = ({
 
   return (
     <div className="card" onClick={open}>
-      <AnimatePresence exitBeforeEnter={true}>
-        {modalOpen &&
-          (type === "public" ? (
-            <RecipeDetail
-              name={name}
-              image={image}
-              userid={userid}
-              procedure={procedure}
-              handleClose={close}
-            ></RecipeDetail>
-          ) : (
-            <UpdateRecipe
-              getdata={getData}
-              _id={_id}
-              mealType={mealType}
-              name={name}
-              image={image}
-              userid={userid}
-              procedure={procedure}
-              handleClose={close}
-            />
-          ))}
-      </AnimatePresence>
+      {modalOpen &&
+        (type === "public" ? (
+          <RecipeDetail
+            name={name}
+            image={image}
+            userid={userid}
+            procedure={procedure}
+            handleClose={close}
+          ></RecipeDetail>
+        ) : (
+          <UpdateRecipe
+            getdata={getData}
+            _id={_id}
+            mealType={mealType}
+            name={name}
+            image={image}
+            userid={userid}
+            procedure={procedure}
+            handleClose={close}
+          />
+        ))}
+
       <div className="img">
-        <img src={image} alt="image" />
+        <img src={image} alt="Food" />
       </div>
       <h3>{name}</h3>
     </div>

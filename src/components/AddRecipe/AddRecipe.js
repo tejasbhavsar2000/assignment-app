@@ -38,7 +38,6 @@ const AddRecipe = ({ User, handleClose }) => {
       ...recipe,
       [name]: value,
     });
-    console.log(recipe);
   };
   const add = () => {
     axios.post("http://localhost:9002/addRecipe", recipe).then((res) => {
@@ -102,7 +101,6 @@ const AddRecipe = ({ User, handleClose }) => {
                 ...recipe,
                 isPublic: e.target.value === "private" ? false : true,
               });
-              console.log(recipe);
             }}
             name="isPublic"
             placeholder="Select Type of Meal"

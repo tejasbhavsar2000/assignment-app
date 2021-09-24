@@ -33,16 +33,34 @@ const RecipeDetail = ({ name, image, procedure, handleClose }) => {
         animate="visible"
         exit="exit"
       >
-        <h1>{name}</h1>
-        <div className="image">
-          <img src={image} alt="image" />
+        <div className="recipe-card">
+          <img
+            src={image}
+            style={{
+              height: "15rem",
+              borderRadius: "0",
+              backgroundSize: "cover",
+              width: "100%",
+            }}
+            alt="Cover"
+          ></img>
+          <div className="recipe-card__body">
+            <h1 className="recipe-card__heading">{name}</h1>
+
+            <ul className="recipe-card__nav">
+              <li>
+                <h3 className="active">Method</h3>
+              </li>
+            </ul>
+
+            <ul className="recipe-card__ingredients">
+              {procedure.split("\n").map((item) => {
+                return <li>{item}</li>;
+              })}
+            </ul>
+          </div>
         </div>
-        <h3>Procedure</h3>
-        <ul>
-          {procedure.split("\n").map((item) => {
-            return <li>{item}</li>;
-          })}
-        </ul>
+
         <button onClick={handleClose}>Close</button>
       </motion.div>
     </Backdrop>

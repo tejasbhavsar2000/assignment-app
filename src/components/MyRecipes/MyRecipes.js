@@ -7,13 +7,11 @@ import "./MyRecipes.css";
 const MyRecipes = ({ user, setLoginUser }) => {
   useEffect(() => {
     getData();
-    console.log(user._id);
   }, []);
   const getData = () => {
     const url = `http://localhost:9002/MyRecipes/${user._id}`;
 
     axios.get(url).then((res) => {
-      console.log(res.data);
       setAllRecipes(res.data);
     });
   };

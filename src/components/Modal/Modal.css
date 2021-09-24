@@ -1,52 +1,11 @@
 .modal {
   font-family: courier, monospace, sans-serif;
   font-weight: normal;
-  min-width: 50vw;
-  min-height: 90vh;
+  width: 100%;
+  height: 100%;
   color: #666;
   background: #666;
 }
-/*.modal > .food {
-  display: flex;
-  width: 100%;
-  margin: 1em auto;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.food > h2 {
-  border-bottom: black solid 0.05em;
-}
-.food > div {
-  display: flex;
-  width: 100%;
-  border: solid 0.03em rgb(96, 211, 247);
-  align-items: center;
-  margin: 0.1em;
-  border-radius: 14px;
-  justify-content: space-evenly;
-}
-.food > div > div {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  margin: 0.1em auto;
-  justify-content: space-evenly;
-}
-
-.food_img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0;
-}
-.food_img img {
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  object-fit: cover;
-}
-
-*/
 .modal > button {
   background: #1877f2;
   border: 1px solid #1877f2;
@@ -80,7 +39,8 @@ li {
 }
 .wrapper {
   position: relative;
-  max-width: 900px;
+  height: fit-content;
+  max-width: 100vw;
   margin: 0 auto;
   padding: 2rem;
   background: #fff;

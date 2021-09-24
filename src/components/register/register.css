@@ -34,3 +34,11 @@
 .button:hover {
   background: cadetblue;
 }
+@media screen and (max-width: 800px) {
+  .register {
+    width: 50vw;
+  }
+  .register > input {
+    width: 80%;
+  }
+}
