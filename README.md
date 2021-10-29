@@ -1,5 +1,4 @@
-# Assignment Project.
-
+# Recipe App
 
 
 ## How to Run
